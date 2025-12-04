@@ -1,0 +1,10 @@
+#+title: Readme
+#+author: Erik An
+#+email: obluda2173@gmail.com
+#+date: <2025-12-04>
+#+lastmod: <2025-12-04 09:31>
+#+options: num:t
+#+startup: overview
+
+* On this project
+This project is a naive (unoptimised) JPEG encoder. The project aim is to deepen my understanding of Discrete Cosine Transformation which is part of my Linear Algebra course. Project is not a university assignment in any way.
