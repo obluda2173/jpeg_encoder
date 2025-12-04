@@ -9,7 +9,7 @@ using .Quantization
 using .Utils
 
 
-function run_jpeg_compression(input_path, output_path)
+function run_jpeg_compression(input_path, output_path, resolution_scale)
 
     println("--- starting compression pipeline ---")
 
@@ -32,6 +32,7 @@ function run_jpeg_compression(input_path, output_path)
 
     println("2. Compressing (DCT + Quantization)...")
 
+    current_table = Quantization.scale_luminace_table(Quantization.LUMINANCE_TABLE, resolution_scale)
     compressed_blocks = []
 
     total_coefficients = 0
@@ -40,7 +41,7 @@ function run_jpeg_compression(input_path, output_path)
     for b in blocks
         freq_block = Transform.dct_2d(b)
 
-        q_block = Quantization.quantize(freq_block, Quantization.LUMINANCE_TABLE)
+        q_block = Quantization.quantize(freq_block, current_table)
 
         total_coefficients += 64
         zero_coefficients += count(x -> x == 0, q_block)
@@ -57,7 +58,7 @@ function run_jpeg_compression(input_path, output_path)
     reconstructed_blocks = []
 
     for b in compressed_blocks
-        deq_block = Quantization.dequantize(b, Quantization.LUMINANCE_TABLE)
+        deq_block = Quantization.dequantize(b, current_table)
         pixel_block = Transform.idct_2d(deq_block)
         push!(reconstructed_blocks, pixel_block)
     end
@@ -80,4 +81,4 @@ function run_jpeg_compression(input_path, output_path)
 end
 
 
-run_jpeg_compression("data/input/test_1.jpg", "data/output/test_1_compressed.jpg")
+run_jpeg_compression("data/input/test_1.jpg", "data/output/test_1_compressed.jpg", 5)

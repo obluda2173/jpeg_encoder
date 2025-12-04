@@ -1,6 +1,6 @@
 module Quantization
 
-export quantize, dequantize, LUMINANCE_TABLE, CHROMINANCE_TABLE
+export luminace_table_clamp_scale, scale_luminace_table, quantize, dequantize, LUMINANCE_TABLE, CHROMINANCE_TABLE
 
 LUMINANCE_TABLE = [
     16 11 10 16 24 40 51 61;
@@ -23,6 +23,14 @@ CHROMINANCE_TABLE = [
     99 99 99 99 99 99 99 99;
     99 99 99 99 99 99 99 99
 ]
+
+function luminace_table_clamp_scale(value, scale)
+    return max(min(value*scale, 255), 0)
+end
+
+function scale_luminace_table(table, scale)
+    return luminace_table_clamp_scale.(table, scale)
+end
 
 function quantize(dct_block, table)
     quant_block = dct_block ./ table
