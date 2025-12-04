@@ -2,7 +2,7 @@
 #+author: Erik An
 #+email: obluda2173@gmail.com
 #+date: <2025-12-04>
-#+lastmod: <2025-12-04 14:05>
+#+lastmod: <2025-12-04 14:08>
 #+options: num:t
 #+startup: overview
 
@@ -75,6 +75,13 @@ To run the encoder, ensure you have the required Julia packages (~Images~, ~File
 #+BEGIN_SRC bash
 julia main.jl
 #+END_SRC
+
+* Demonstration
+
+- [[file:./data/input/test_1.jpg][test_1.jpg]]
+
+- [[file:./data/output/test_1_compressed.jpg][test_1_compressed.jpg]]
+  (only works with gray images)
 
 * Important!
 Note that this is a naive JPEG encoder. Thus it is not optimised, which you can notice in the size of compressed file being greater than size of original file. The goal of this project was again to deepen my understanding of DCT, at which I succeeded.
