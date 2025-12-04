@@ -80,9 +80,11 @@ julia main.jl
 Below you can see the working example of DCT compression:
 
 - Original:
+
   [[data/input/test_1.jpg]]
 
 - Compressed:
+
   [[data/output/test_1_compressed.jpg]]
 
 * Important!
